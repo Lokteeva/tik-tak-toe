@@ -1,12 +1,14 @@
-import randomColor from "randomcolor";
-import styled from "styled-components";
+import randomColor from 'randomcolor';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding: 20px;
-  min-height: 100vh;
-  max-width: 100%;
+  padding: 10px;
+  margin: 20px;
+  width: 570px;
   background: #222;
   color: #fff;
+  border-radius: 8px;
+  // margin: 0 auto;
 `;
 
 export const Center = styled.div`
@@ -19,11 +21,11 @@ export const Grid = styled.div`
   grid-template-columns: repeat(19, 30px);
   grid-template-rows: repeat(19, 30px);
   justify-content: center;
-  margin: 20px auto;
+  margin: 0 0  20px 0;
 `;
 
 export const Cell = styled.button`
-  border: 1px solid #888;
+  border: 1px solid #aaa;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -36,18 +38,6 @@ export const Cell = styled.button`
 `;
 
 export const Span = styled.span`
-  padding: 6px 20px;
-
-  &.symbol--x {
-    color: #80ff18;
-  }
-
-  &.symbol--o {
-    color: #f7fa05;
-  }
-
-  &.symbol {
-    font-size: 40px;
-    line-height: 24px;
-  }
+  display: flex;
+  padding-bottom: 20px;
 `;
