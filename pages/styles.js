@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
   max-width: 100%;
   background: #222;
   color: #fff;
-  font-family: Arial;
 `;
 
 export const Center = styled.div`
@@ -17,16 +16,14 @@ export const Center = styled.div`
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(19, 30px);
+  grid-template-rows: repeat(19, 30px);
   justify-content: center;
-  width: 300px;
-  margin: 40px auto;
+  margin: 20px auto;
 `;
 
 export const Cell = styled.button`
-  height: 100px;
-  width: 100px;
-  border: 1px solid #fff;
+  border: 1px solid #888;
   display: grid;
   justify-content: center;
   align-items: center;
