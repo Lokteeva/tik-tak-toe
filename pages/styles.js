@@ -58,3 +58,7 @@ export const GameInfo = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 50px;
 `;
+
+export const Timer = styled.div`
+  color: ${(props) => (props.isDanger ? 'red' : '#fff')};
+`;

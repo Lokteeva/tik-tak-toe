@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { GAME_SYMBOLS, MOVE_ORDER } from './constants';
 
-// не пробрасывается playersCount GameInfo
 function getNextMove(currentMove, playersCount) {
   const slicedMoveOrder = MOVE_ORDER.slice(0, playersCount);
 
-  console.log(slicedMoveOrder);
-
   const nextMoveIndex = slicedMoveOrder.indexOf(currentMove) + 1;
+
   return slicedMoveOrder[nextMoveIndex] ?? slicedMoveOrder[0];
 }
 

@@ -3,13 +3,16 @@ import { Button } from '../components/Button/Button';
 import { GemeSymbol } from '../components/GemeSymbol';
 import useGameState from '../components/useGameState';
 import { GameInfo } from '../components/GameInfo';
+import { useState } from 'react';
 
-export default function GameField({playersCount}) {
+export default function GameField() {
+  const [playersCount] = useState(2);
   const { cells, currentMove, nextMove, handleCellClick } = useGameState(playersCount);
+
 
   return (
     <>
-      <GameInfo playersCount={playersCount}/>
+      <GameInfo playersCount={playersCount} currentMove={currentMove}/>
       <Styled.Wrapper>
         <Styled.Span>
           Ход: <GemeSymbol symbol={currentMove} />
