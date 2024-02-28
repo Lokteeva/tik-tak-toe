@@ -60,5 +60,5 @@ export const GameInfo = styled.div`
 `;
 
 export const Timer = styled.div`
-  color: ${(props) => (props.isDanger ? 'red' : '#fff')};
+  color: ${(props) => (props.$isTimerRunning ? (props.$isDanger ? 'red' : '#fff') : 'gray')};
 `;

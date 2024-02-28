@@ -9,13 +9,11 @@ export function GameInfo({ playersCount, currentMove }) {
     <Styled.Wrapper>
       <Styled.GameInfo>
         {players.slice(0, playersCount).map((player) => (
-          <>
             <PlayerInfo
               key={player.id}
               playerInfo={player}
               isTimerRunning={currentMove === player.symbol}
             />
-          </>
         ))}
       </Styled.GameInfo>
     </Styled.Wrapper>
@@ -23,7 +21,7 @@ export function GameInfo({ playersCount, currentMove }) {
 }
 
 function PlayerInfo({ playerInfo, isTimerRunning }) {
-  const [seconds, setSeconds] = useState(6);
+  const [seconds, setSeconds] = useState(60);
 
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, '0');
   const secondsString = String(seconds % 60).padStart(2, '0');
@@ -32,11 +30,17 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
 
   useEffect(() => {
     if (isTimerRunning) {
-      setInterval(() => {
+      const interval = setInterval(() => {
         setSeconds((s) => Math.max(s - 1, 0));
       }, 1000);
+      return () => {
+        clearInterval(interval);
+        setSeconds(60)
+      }
     }
   }, [isTimerRunning]);
+
+
 
   return (
     <div>
@@ -44,17 +48,10 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
       <Styled.Icon>
         <GemeSymbol symbol={playerInfo.symbol} />
       </Styled.Icon>
-      {/* переделать условное отображение */}
-      {!isDanger && (
-        <Styled.Timer>
-          {minutesString}:{secondsString}
-        </Styled.Timer>
-      )}
-      {isDanger && (
-        <Styled.Timer isDanger>
-          {minutesString}:{secondsString}
-        </Styled.Timer>
-      )}
+
+      <Styled.Timer $isTimerRunning={isTimerRunning} $isDanger={isDanger}>
+      {minutesString}:{secondsString}
+    </Styled.Timer>
     </div>
   );
 }
@@ -62,7 +59,7 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
 function Profile({ name, rating, avatar }) {
   return (
     <>
-      <Image src={avatar} alt="foto" />
+      <Image src={avatar} alt="foto" priority/>
       <Styled.Span>{name}</Styled.Span>
       <Styled.Span>Rating: {rating}</Styled.Span>
     </>
