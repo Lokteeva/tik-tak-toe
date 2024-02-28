@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
   width: 570px;
   background: #222;
   color: #fff;
@@ -18,10 +18,10 @@ export const Center = styled.div`
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(19, 30px);
-  grid-template-rows: repeat(19, 30px);
+  grid-template-columns: repeat(19, 25px);
+  grid-template-rows: repeat(19, 25px);
   justify-content: center;
-  margin: 0 0  20px 0;
+  margin: 0 0 20px 0;
 `;
 
 export const Cell = styled.button`
@@ -39,5 +39,22 @@ export const Cell = styled.button`
 
 export const Span = styled.span`
   display: flex;
-  padding-bottom: 20px;
+  padding-bottom: 7px;
+`;
+
+export const Icon = styled.div`
+  border-radius: 50%;
+  background-color: #fff;
+  width: 35px;
+  height: 35px;
+  color: #333;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
+export const GameInfo = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
 `;

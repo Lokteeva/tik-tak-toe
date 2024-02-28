@@ -1,43 +1,18 @@
-import { useState } from 'react';
 import * as Styled from './styles';
 import { Button } from '../components/Button/Button';
-import { GAME_SYMBOLS } from '../components/constants';
-import { GemeSymbol } from '../components/gemeSymbol';
+import { GemeSymbol } from '../components/GemeSymbol';
+import useGameState from '../components/useGameState';
+import { GameInfo } from '../components/GameInfo';
 
-const MOVE_ORDER = [
-  GAME_SYMBOLS.CROSS,
-  GAME_SYMBOLS.ZERO,
-  GAME_SYMBOLS.TRIANGLE,
-  GAME_SYMBOLS.SQUARE,
-];
-
-function getNextMove(currentMove) {
-  const nextMoveIndex = MOVE_ORDER.indexOf(currentMove) + 1;
-  return MOVE_ORDER[nextMoveIndex] ?? MOVE_ORDER[0];
-}
-
-export default function GameField() {
-  const [{ cells, currentMove }, setGameState] = useState(() => ({
-    cells: new Array(19 * 19).fill(null),
-    currentMove: GAME_SYMBOLS.CROSS,
-  }));
-  const nextMove = getNextMove(currentMove);
-
-  const handleCellClick = (index) => {
-    setGameState((lastGameState) => ({
-      ...lastGameState,
-      currentMove: getNextMove(lastGameState.currentMove),
-      cells: lastGameState.cells.map((cell, i) =>
-        i === index ? getNextMove(lastGameState.currentMove) : cell,
-      ),
-    }));
-  };
+export default function GameField({playersCount}) {
+  const { cells, currentMove, nextMove, handleCellClick } = useGameState(playersCount);
 
   return (
     <>
+      <GameInfo playersCount={playersCount}/>
       <Styled.Wrapper>
         <Styled.Span>
-          Ход: <GemeSymbol symbol={currentMove} />{' '}
+          Ход: <GemeSymbol symbol={currentMove} />
         </Styled.Span>
         <div>
           Следующий: <GemeSymbol symbol={nextMove} />
