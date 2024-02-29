@@ -9,7 +9,7 @@ export default function useGameState(plyersCount) {
     currentMove: GAME_SYMBOLS.CROSS,
   }));
 
-  console.log(computeWinner(cells))
+  // console.log(computeWinner(cells))
   
   const winnerSequence = computeWinner(cells);
 

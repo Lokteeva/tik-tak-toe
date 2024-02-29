@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { players } from './constants';
 
-export function GameInfo({ playersCount, currentMove }) {
+export function GameInfo({ playersCount, currentMove, isDisabled }) {
   return (
     <Styled.Wrapper>
       <Styled.GameInfo>
@@ -12,7 +12,7 @@ export function GameInfo({ playersCount, currentMove }) {
           <PlayerInfo
             key={player.id}
             playerInfo={player}
-            isTimerRunning={currentMove === player.symbol}
+            isTimerRunning={currentMove === player.symbol && !isDisabled }
           />
         ))}
       </Styled.GameInfo>

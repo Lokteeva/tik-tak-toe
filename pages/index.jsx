@@ -9,7 +9,7 @@ export default function GameField() {
   const [playersCount] = useState(2);
   const { cells, currentMove, nextMove, handleCellClick, winnerSequence } = useGameState(playersCount);
 
-  console.log(winnerSequence + "победа")
+  // console.log(winnerSequence + "победа")
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function GameField() {
         <Button>Играть</Button>........
       </Styled.Wrapper>
 
-      <GameInfo playersCount={playersCount} currentMove={currentMove} />
+      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSequence} />
       
       <Styled.Wrapper>
         <Styled.Span>
