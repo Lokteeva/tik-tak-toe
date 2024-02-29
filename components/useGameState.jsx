@@ -16,6 +16,8 @@ export default function useGameState(plyersCount) {
 
   const nextMove = getNextMove(currentMove, plyersCount, playersTimeOver);
 
+  const winnerSymbol = nextMove === currentMove ? currentMove : winnerSequence?.[0]
+
   const handleCellClick = (index) => {
     setGameState((lastGameState) => {
       if (lastGameState.cells[index]) {
@@ -48,6 +50,7 @@ export default function useGameState(plyersCount) {
     nextMove,
     handleCellClick,
     winnerSequence,
-    handlePlayerTimeOver
+    handlePlayerTimeOver,
+    winnerSymbol
   };
 }

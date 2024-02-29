@@ -22,7 +22,7 @@ export function GameInfo({ playersCount, currentMove, isDisabled, onPlayerTimeOv
 }
 
 function PlayerInfo({ playerInfo, isTimerRunning, onTimeOver }) {
-  const [seconds, setSeconds] = useState(6);
+  const [seconds, setSeconds] = useState(3);
 
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, '0');
   const secondsString = String(seconds % 60).padStart(2, '0');
@@ -36,7 +36,7 @@ function PlayerInfo({ playerInfo, isTimerRunning, onTimeOver }) {
       }, 1000);
       return () => {
         clearInterval(interval);
-        setSeconds(6);
+        setSeconds(3);
       };
     }
   }, [isTimerRunning]);

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function GameField() {
   const [playersCount] = useState(4);
-  const { cells, currentMove, nextMove, handleCellClick, winnerSequence, handlePlayerTimeOver } = useGameState(playersCount);
+  const { cells, currentMove, nextMove, handleCellClick, winnerSequence, handlePlayerTimeOver, winnerSymbol } = useGameState(playersCount);
 
   // console.log(winnerSequence + "победа")
 
@@ -17,14 +17,17 @@ export default function GameField() {
         <Button>Играть</Button>........
       </Styled.Wrapper>
 
-      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSequence} onPlayerTimeOver={handlePlayerTimeOver}/>
+      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSymbol} onPlayerTimeOver={handlePlayerTimeOver}/>
       
       <Styled.Wrapper>
         <Styled.Span>
-          Ход: <GemeSymbol symbol={currentMove} />
+          Ход: {!winnerSymbol && <GemeSymbol symbol={currentMove} />}
         </Styled.Span>
         <div>
-          Следующий: <GemeSymbol symbol={nextMove} />
+          Следующий: {!winnerSymbol && <GemeSymbol symbol={nextMove} />}
+        </div>
+        <div>Победитель: 
+          {winnerSymbol && <GemeSymbol symbol={winnerSymbol}/>}
         </div>
       </Styled.Wrapper>
 
@@ -35,15 +38,13 @@ export default function GameField() {
               <Styled.Cell
               key={index}
               $isWinner = {winnerSequence?.includes(index)}
-              disabled={!!winnerSequence}
+              disabled={!!winnerSymbol}
               onClick={() => {
                 handleCellClick(index);
               }}>
               {symbol && <GemeSymbol symbol={symbol} />}
             </Styled.Cell>
-            )
-           
-            })}
+            )})}
         </Styled.Grid>
         <Styled.Center>
           <Button>Новая игра</Button>
