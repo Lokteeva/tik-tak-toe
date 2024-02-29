@@ -9,11 +9,11 @@ export function GameInfo({ playersCount, currentMove }) {
     <Styled.Wrapper>
       <Styled.GameInfo>
         {players.slice(0, playersCount).map((player) => (
-            <PlayerInfo
-              key={player.id}
-              playerInfo={player}
-              isTimerRunning={currentMove === player.symbol}
-            />
+          <PlayerInfo
+            key={player.id}
+            playerInfo={player}
+            isTimerRunning={currentMove === player.symbol}
+          />
         ))}
       </Styled.GameInfo>
     </Styled.Wrapper>
@@ -35,12 +35,10 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
       }, 1000);
       return () => {
         clearInterval(interval);
-        setSeconds(60)
-      }
+        setSeconds(60);
+      };
     }
   }, [isTimerRunning]);
-
-
 
   return (
     <div>
@@ -50,8 +48,8 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
       </Styled.Icon>
 
       <Styled.Timer $isTimerRunning={isTimerRunning} $isDanger={isDanger}>
-      {minutesString}:{secondsString}
-    </Styled.Timer>
+        {minutesString}:{secondsString}
+      </Styled.Timer>
     </div>
   );
 }
@@ -59,7 +57,7 @@ function PlayerInfo({ playerInfo, isTimerRunning }) {
 function Profile({ name, rating, avatar }) {
   return (
     <>
-      <Image src={avatar} alt="foto" priority/>
+      <Image src={avatar} alt="foto" priority />
       <Styled.Span>{name}</Styled.Span>
       <Styled.Span>Rating: {rating}</Styled.Span>
     </>

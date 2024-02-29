@@ -7,12 +7,18 @@ import { useState } from 'react';
 
 export default function GameField() {
   const [playersCount] = useState(2);
-  const { cells, currentMove, nextMove, handleCellClick } = useGameState(playersCount);
+  const { cells, currentMove, nextMove, handleCellClick, winnerSequence } = useGameState(playersCount);
 
+  console.log(winnerSequence + "победа")
 
   return (
     <>
-      <GameInfo playersCount={playersCount} currentMove={currentMove}/>
+      <Styled.Wrapper>........
+        <Button>Играть</Button>........
+      </Styled.Wrapper>
+
+      <GameInfo playersCount={playersCount} currentMove={currentMove} />
+      
       <Styled.Wrapper>
         <Styled.Span>
           Ход: <GemeSymbol symbol={currentMove} />
@@ -24,15 +30,19 @@ export default function GameField() {
 
       <Styled.Wrapper>
         <Styled.Grid>
-          {cells.map((symbol, index) => (
-            <Styled.Cell
+          {cells.map((symbol, index) => {
+            return (
+              <Styled.Cell
               key={index}
+              $isWinner = {winnerSequence?.includes(index)}
               onClick={() => {
                 handleCellClick(index);
               }}>
               {symbol && <GemeSymbol symbol={symbol} />}
             </Styled.Cell>
-          ))}
+            )
+           
+            })}
         </Styled.Grid>
         <Styled.Center>
           <Button>Новая игра</Button>

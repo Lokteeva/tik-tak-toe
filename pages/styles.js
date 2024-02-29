@@ -29,7 +29,9 @@ export const Cell = styled.button`
   display: grid;
   justify-content: center;
   align-items: center;
-  background: none;
+  // background: none;
+  background: ${(props) => (props.$isWinner ? 'rgba(255,52,44,0.5)' : 'none')};
+  
   cursor: pointer;
 
   &.cell--win {
