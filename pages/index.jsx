@@ -6,8 +6,8 @@ import { GameInfo } from '../components/GameInfo';
 import { useState } from 'react';
 
 export default function GameField() {
-  const [playersCount] = useState(2);
-  const { cells, currentMove, nextMove, handleCellClick, winnerSequence } = useGameState(playersCount);
+  const [playersCount] = useState(4);
+  const { cells, currentMove, nextMove, handleCellClick, winnerSequence, handlePlayerTimeOver } = useGameState(playersCount);
 
   // console.log(winnerSequence + "победа")
 
@@ -17,7 +17,7 @@ export default function GameField() {
         <Button>Играть</Button>........
       </Styled.Wrapper>
 
-      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSequence} />
+      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSequence} onPlayerTimeOver={handlePlayerTimeOver}/>
       
       <Styled.Wrapper>
         <Styled.Span>
@@ -35,6 +35,7 @@ export default function GameField() {
               <Styled.Cell
               key={index}
               $isWinner = {winnerSequence?.includes(index)}
+              disabled={!!winnerSequence}
               onClick={() => {
                 handleCellClick(index);
               }}>
