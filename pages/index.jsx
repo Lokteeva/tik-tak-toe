@@ -4,30 +4,45 @@ import { GemeSymbol } from '../components/GemeSymbol';
 import useGameState from '../components/useGameState';
 import { GameInfo } from '../components/GameInfo';
 import { useState } from 'react';
+import { Modal } from '../components/modal/modal';
 
 export default function GameField() {
   const [playersCount] = useState(4);
-  const { cells, currentMove, nextMove, handleCellClick, winnerSequence, handlePlayerTimeOver, winnerSymbol } = useGameState(playersCount);
+  const {
+    cells,
+    currentMove,
+    nextMove,
+    handleCellClick,
+    winnerSequence,
+    handlePlayerTimeOver,
+    winnerSymbol,
+  } = useGameState(playersCount);
 
   // console.log(winnerSequence + "победа")
 
   return (
     <>
-      <Styled.Wrapper>........
-        <Button>Играть</Button>........
+      <Modal isOpen={winnerSymbol}>
+        <div>Победитель: {winnerSymbol && <GemeSymbol symbol={winnerSymbol} />}</div>
+      </Modal>
+
+      <Styled.Wrapper>
+        ........<Button>Играть</Button>........
       </Styled.Wrapper>
 
-      <GameInfo playersCount={playersCount} currentMove={currentMove} isDisabled={!!winnerSymbol} onPlayerTimeOver={handlePlayerTimeOver}/>
-      
+      <GameInfo
+        playersCount={playersCount}
+        currentMove={currentMove}
+        isDisabled={!!winnerSymbol}
+        onPlayerTimeOver={handlePlayerTimeOver}
+      />
+
       <Styled.Wrapper>
-        <Styled.Span>
-          Ход: {!winnerSymbol && <GemeSymbol symbol={currentMove} />}
-        </Styled.Span>
+        <Styled.Span>Ход: {!winnerSymbol && <GemeSymbol symbol={currentMove} />}</Styled.Span>
+        <div>Следующий: {!winnerSymbol && <GemeSymbol symbol={nextMove} />}</div>
         <div>
-          Следующий: {!winnerSymbol && <GemeSymbol symbol={nextMove} />}
-        </div>
-        <div>Победитель: 
-          {winnerSymbol && <GemeSymbol symbol={winnerSymbol}/>}
+          Победитель:
+          {winnerSymbol && <GemeSymbol symbol={winnerSymbol} />}
         </div>
       </Styled.Wrapper>
 
@@ -36,15 +51,16 @@ export default function GameField() {
           {cells.map((symbol, index) => {
             return (
               <Styled.Cell
-              key={index}
-              $isWinner = {winnerSequence?.includes(index)}
-              disabled={!!winnerSymbol}
-              onClick={() => {
-                handleCellClick(index);
-              }}>
-              {symbol && <GemeSymbol symbol={symbol} />}
-            </Styled.Cell>
-            )})}
+                key={index}
+                $isWinner={winnerSequence?.includes(index)}
+                disabled={!!winnerSymbol}
+                onClick={() => {
+                  handleCellClick(index);
+                }}>
+                {symbol && <GemeSymbol symbol={symbol} />}
+              </Styled.Cell>
+            );
+          })}
         </Styled.Grid>
         <Styled.Center>
           <Button>Новая игра</Button>

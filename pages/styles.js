@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background: #222;
   color: #fff;
   border-radius: 8px;
-  // margin: 0 auto;
+  margin: 0 auto;
 `;
 
 export const Center = styled.div`
